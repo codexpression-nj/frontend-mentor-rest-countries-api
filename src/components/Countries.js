@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import countryService from '../services/countryService';
 import './Countries.css'
+import CountryDetails from './CountryDetails';
 function Countries() {
     const [countries, setCountries] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
 
     const [region, setRegion] = useState("All");
+    const [selectedCountry, setSelectedCountry] = useState(null);
+
     useEffect(() => {
         if (searchTerm) {
             countryService.getCountry(searchTerm)
@@ -39,17 +42,17 @@ function Countries() {
 
 
     return (
-        <div className='body'>        
-        <label>
-            Search by Name:
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Enter country name"
-            />
-        </label>
-        <label>
+        <div className='body'>
+            <label>
+                Search by Name:
+                <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Enter country name"
+                />
+            </label>
+            <label>
                 Filter by Region:
                 <select value={region} onChange={(e) => setRegion(e.target.value)}>
                     <option value="All">All</option>
@@ -59,20 +62,27 @@ function Countries() {
                     <option value="Europe">Europe</option>
                     <option value="Oceania">Oceania</option>
                 </select>
-         </label>
-            <div className='country-container'>
+            </label>
+            {selectedCountry ? (
+                <CountryDetails country={selectedCountry} onClose={() => setSelectedCountry(null)}/>
+            ): (
+                <div className='country-container'>
                 {countries.map((country, index) => (
-                    <div className='card'  key={index}>
+                    <div className='card' key={index} onClick={() => setSelectedCountry(country)} >
                         <img className='flag' src={country.flags.png} alt={country.name.common} />
-                       <div>
-                       <p>{country.name.common}</p>
-                        <p>{country.region}</p>
-                        <p>{country.capital}</p>
-                        <p>{country.region}</p>
+                        <div>
+                            <p>{country.name.common}</p>
+                            <p>{country.region}</p>
+                            <p>{country.capital}</p>
+                            <p>{country.region}</p>
                         </div>
                     </div>
                 ))}
-              </div>
+            </div>
+                )
+
+         }
+            
         </div>
 
     )
