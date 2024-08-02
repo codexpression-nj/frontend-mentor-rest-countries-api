@@ -14,6 +14,7 @@ function Countries() {
             countryService.getCountry(searchTerm)
                 .then(response => {
                     setCountries(response.data);
+                    console.log(response.data);
                 })
                 .catch(error => {
                     console.error('Error fetching the countries by name:', error);
@@ -43,17 +44,16 @@ function Countries() {
 
     return (
         <div className='body'>
-            <label>
-                Search by Name:
+            {/* <label> */}
                 <input
+                    className='search-bar'
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Enter country name"
+                    placeholder="Search for a country..."
                 />
-            </label>
+            {/* </label> */}
             <label>
-                Filter by Region:
                 <select value={region} onChange={(e) => setRegion(e.target.value)}>
                     <option value="All">All</option>
                     <option value="Africa">Africa</option>

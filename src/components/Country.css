@@ -1,0 +1,15 @@
+p{
+    color: black;
+}
+
+.container{
+    display: flex;
+    height: 50%;
+}
+
+.content{
+    padding: 100px;
+    /* height: 14px; */
+    text-align: start;
+    /* background-color: violet; */
+}
