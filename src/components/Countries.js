@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import countryService from '../services/countryService';
 import './Countries.css'
 import CountryDetails from './CountryDetails';
+import { Link } from 'react-router-dom';
+
 function Countries() {
     const [countries, setCountries] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
@@ -68,7 +70,10 @@ function Countries() {
             ): (
                 <div className='country-container'>
                 {countries.map((country, index) => (
+                    
                     <div className='card' key={index} onClick={() => setSelectedCountry(country)} >
+                                <Link to={`/country/${country.cca3}`}/>
+
                         <img className='flag' src={country.flags.png} alt={country.name.common} />
                         <div>
                             <p>{country.name.common}</p>
