@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Country.css'
-const CountryDetails = ({ country, onClose }) => {
-    console.log(country);
+import countryService from '../services/countryService';
+import { useParams } from 'react-router-dom';
+const CountryDetails = ({ onClose }) => {
+    // console.log(country);
+    const { cca3 } = useParams();
+    const [country, setCountry] = useState([]);
+
+    useEffect(() => {
+        countryService.getAllCountries()
+          .then(response => {
+            const selectedCountry = response.data.find(country => country.cca3 === cca3);
+            setCountry(selectedCountry);
+            console.log(country.flags.png);
+          })
+          .catch(error => {
+            console.error('Error fetching the country details:', error);
+          });
+      }, [cca3]);
+      if (!country) return <p>Loading...</p>;
+
     return (
         <>
-            <button onClick={onClose}>Close</button>
+             <button onClick={onClose}>Close</button>
 
             <div className="container">
             <img src={country.flags.png} alt={country.name.common} style={{width:'30%',height: '30%',alignSelf:'center'}}/>
@@ -23,7 +41,7 @@ const CountryDetails = ({ country, onClose }) => {
                     <p><strong>Languages:</strong> {Object.values(country.languages).join(', ')}</p>
                 </section>
 
-            </div>
+            </div> 
         </>
     )
 }

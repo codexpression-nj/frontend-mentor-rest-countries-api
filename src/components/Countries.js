@@ -65,14 +65,14 @@ function Countries() {
                     <option value="Oceania">Oceania</option>
                 </select>
             </label>
-            {selectedCountry ? (
+            {/* {selectedCountry ? (
                 <CountryDetails country={selectedCountry} onClose={() => setSelectedCountry(null)}/>
-            ): (
+            ): ( */}
                 <div className='country-container'>
                 {countries.map((country, index) => (
                     
                     <div className='card' key={index} onClick={() => setSelectedCountry(country)} >
-                                <Link to={`/country/${country.cca3}`}/>
+                      <Link to={`/country/${country.cca3}`}>mnj</Link>
 
                         <img className='flag' src={country.flags.png} alt={country.name.common} />
                         <div>
@@ -84,9 +84,9 @@ function Countries() {
                     </div>
                 ))}
             </div>
-                )
+                 {/* ) */}
 
-         }
+         {/* } */}
             
         </div>
 
