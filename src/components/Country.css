@@ -12,4 +12,5 @@ p{
     /* height: 14px; */
     text-align: start;
     /* background-color: violet; */
+    display: flex;
 }

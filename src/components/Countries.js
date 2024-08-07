@@ -47,45 +47,46 @@ function Countries() {
     return (
         <div className='body'>
             <div className='filter'>
-            <input
+                <input
                     className='search-bar'
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search for a country..."
                 />
-            <label>
-                <select className='region' value={region} onChange={(e) => setRegion(e.target.value)}>
-                    <option value="All">All</option>
-                    <option value="Africa">Africa</option>
-                    <option value="Americas">America</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Oceania">Oceania</option>
-                </select>
-            </label>
+                <label>
+                    <select className='region' value={region} onChange={(e) => setRegion(e.target.value)}>
+                        <option value="All">All</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Americas">America</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+                </label>
             </div>
-            
-          
-                <div className='country-container'>
-                {countries.map((country, index) => (
-                    
-                    <div className='card' key={index} onClick={() => setSelectedCountry(country)} >
-                      <Link to={`/country/${country.cca3}`}>
 
-                        <img className='flag' src={country.flags.png} alt={country.name.common} />
-                        </Link>
+
+            <div className='country-container'>
+                {countries.map((country,  index  ) => (
+
+                    <div className='card' key={index} onClick={() => setSelectedCountry(country)} >
+                        <div style={  {height: 'fit-content'}}>
+                            <Link to={`/country/${country.cca3}`}>
+                                <img className='flag' src={country.flags.png} alt={country.name.common} />
+                            </Link>
+                        </div>  
                         <div>
                             <p>{country.name.common}</p>
-                            <p>{country.region}</p>
-                            <p>{country.capital}</p>
-                            <p>{country.region}</p>
+                            <p>Population: {country.region}</p>
+                            <p>Region: {country.region}</p>
+                            <p>Capital: {country.capital}</p>
                         </div>
                     </div>
                 ))}
-                
+
             </div>
-            
+
         </div>
 
     )
